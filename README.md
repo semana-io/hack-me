@@ -34,12 +34,12 @@ Other libs may be added.
 
 ### Desks
 
-The desk page will allow the user to create, view and modify the desk list.
+The desk page will allow the user to create, view and modify the desk (unique number) list.
 
 
 ### Employees
 
-The employee page will allow the user to create, view and modify the employee list.
+The employee page will allow the user to create, view and modify the employee (name, etc...) list.
 
 An employee may have a preferred ordered desk list.
 
@@ -49,6 +49,8 @@ An employee may have a preferred ordered desk list.
 The calendar page will display employee desk assignation for the next following days.
 
 An action will allow the user to assign a specific free desk to an employee for a specific day.
+
+An action will allow the user to remove an assignation.
 
 An action will allow the user to trigger an algorithm that assign automatically desk to employee according to the preferred desk list.
 
