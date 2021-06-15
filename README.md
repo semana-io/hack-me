@@ -1,5 +1,11 @@
 # Hack Me
 
+## Delivery
+
+Let's create your branch on top of the master.
+
+At the end, push all changes and create a pull request.
+
 ## How to run and test
 
 This app has been initiated with create-react-app with typescript.
@@ -28,9 +34,11 @@ The app will contain a main menu with 3 items:
 - Employees
 - Calendar
 
-The app will be developed in TypeScript and will contain relevant unit test.
+The app will be developed in TypeScript and will contain relevant unit test. Other libs may be added.
 
-Other libs may be added.
+The delivery is not supposed to be all functional, let's focus on architecture, wording, ...
+
+You'll have to present and justify your decisions during the debrief.
 
 ### Desks
 
