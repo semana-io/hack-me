@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grommet } from 'grommet'
-import Layout from 'components/Layout'
+import RouterWrapper from 'router/RouterWrapper'
 
 const theme = {
 	global: {
@@ -14,7 +14,7 @@ const theme = {
 
 const App = () => (
 	<Grommet theme={theme}>
-		<Layout> Body </Layout>
+		<RouterWrapper />
 	</Grommet>
 )
 

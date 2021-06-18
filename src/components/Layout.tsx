@@ -7,7 +7,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
-	<Box fill>
+	<Box>
 		<AppBar />
 		<Box
 			flex

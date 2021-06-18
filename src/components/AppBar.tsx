@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header, Box, Heading } from 'grommet'
+import { NavLink } from 'react-router-dom'
 
 interface AppBarProps {}
 
@@ -13,15 +14,10 @@ const AppBar: React.FC<AppBarProps> = () => (
 			Semana Technical Test
 		</Heading>
 		<Box direction='row' gap='small'>
-			<Box onClick={() => {}} hoverIndicator>
-				Desks
-			</Box>
-			<Box onClick={() => {}} hoverIndicator>
-				Employees
-			</Box>
-			<Box onClick={() => {}} hoverIndicator>
-				Calendar
-			</Box>
+			<NavLink to='/'>Home</NavLink>
+			<NavLink to='/desks'>Desks</NavLink>
+			<NavLink to='/employees'>Employees</NavLink>
+			<NavLink to='/calendar'>Calendar</NavLink>
 		</Box>
 	</Header>
 )
