@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Calendar from 'pages/Calendar'
-import Desks from 'pages/Desks'
-import Employees from 'pages/Employees'
-import Home from 'pages/Home'
+import CalendarPage from 'pages/CalendarPage'
+import DesksPage from 'pages/DesksPage'
+import EmployeesPage from 'pages/EmployeesPage'
+import HomePage from 'pages/HomePage'
 import Layout from 'components/Layout'
 
 interface RouterWrapperProps {}
@@ -13,16 +13,16 @@ const RouterWrapper: React.FC<RouterWrapperProps> = () => (
 		<Layout>
 			<Switch>
 				<Route exact path='/'>
-					<Home />
+					<HomePage />
 				</Route>
 				<Route path='/desks'>
-					<Desks />
+					<DesksPage />
 				</Route>
 				<Route path='/employees'>
-					<Employees />
+					<EmployeesPage />
 				</Route>
 				<Route path='/calendar'>
-					<Calendar />
+					<CalendarPage />
 				</Route>
 			</Switch>
 		</Layout>
