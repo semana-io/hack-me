@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Grid, Form, FormField, TextInput, Button } from 'grommet'
+import { FormClose } from 'grommet-icons'
 import { useMyContext } from 'context/MyContext'
 import Employee from 'models/Employee'
 
@@ -20,21 +21,32 @@ const EmployeesPage: React.FC = () => {
 		setInputs(initialState)
 	}
 
+	const handleOnClickItem = (id: string) => {
+		setEmployees(employees.filter(employee => employee.id !== id))
+	}
+
 	const employeesList = employees.map(employee => (
-		<li key={employee.id}>{`${employee.firstname} ${employee.lastname}`}</li>
+		<Box key={employee.id} direction='row' align='center'>
+			{`${employee.firstname} ${employee.lastname}`}
+			<Button
+				icon={<FormClose />}
+				onClick={() => handleOnClickItem(employee.id)}
+			/>
+		</Box>
 	))
 	return (
 		<Grid
 			rows={['auto', 'medium']}
 			columns={['medium', 'auto']}
 			gap='small'
+			margin='small'
 			areas={[
 				{ name: 'header', start: [0, 0], end: [1, 0] },
 				{ name: 'form', start: [0, 1], end: [0, 1] },
 				{ name: 'list', start: [1, 1], end: [1, 1] },
 			]}
 		>
-			<Box gridArea='header' align='center' width='100vw'>
+			<Box gridArea='header' align='center' width='95vw'>
 				<h1>Employees management</h1>
 			</Box>
 			<Box gridArea='form' pad='medium' border='all' margin='small'>
@@ -60,7 +72,7 @@ const EmployeesPage: React.FC = () => {
 					</Box>
 				</Form>
 			</Box>
-			<Box gridArea='list' pad='medium' gap='xsmall'>
+			<Box gridArea='list' pad='medium' gap='xsmall' border='all'>
 				{employeesList}
 			</Box>
 		</Grid>
