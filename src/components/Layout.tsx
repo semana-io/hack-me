@@ -9,7 +9,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => (
 	<Box>
 		<AppBar />
-		<Main align='center' justify='center' pad='small'>
+		<Main align='center' justify='center' pad='small' width='100vw'>
 			{children}
 		</Main>
 	</Box>

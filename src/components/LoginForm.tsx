@@ -3,7 +3,7 @@ import { Form, FormField, TextInput, Box, Button } from 'grommet'
 import { useHistory, withRouter } from 'react-router-dom'
 import { useMyContext } from 'context/MyContext'
 
-interface LoginInput {
+interface LoginFormInput {
 	username: string
 	password: string
 }
@@ -13,7 +13,7 @@ const initialState = { username: '', password: '' }
 const LoginForm: React.FC = () => {
 	const history = useHistory()
 	const { setUsername } = useMyContext()
-	const [inputs, setInputs] = useState<LoginInput>(initialState)
+	const [inputs, setInputs] = useState<LoginFormInput>(initialState)
 
 	const handleOnSubmit = (username: string) => {
 		setUsername(username)
@@ -25,7 +25,6 @@ const LoginForm: React.FC = () => {
 			onChange={nextValue => {
 				setInputs(nextValue)
 			}}
-			onReset={() => setInputs(initialState)}
 			onSubmit={({ value }) => handleOnSubmit(value.username)}
 		>
 			<FormField name='username' htmlFor='username-input-id' label='Username'>
