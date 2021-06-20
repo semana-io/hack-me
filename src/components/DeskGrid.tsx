@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Grid, Box } from 'grommet'
 import { useMyContext } from 'context/MyContext'

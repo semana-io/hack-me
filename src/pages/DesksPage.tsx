@@ -1,30 +1,11 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
-import { Box, Grid, Form, FormField, TextInput, Button } from 'grommet'
+import React from 'react'
+import { Box, Grid, Button } from 'grommet'
 import { FormClose } from 'grommet-icons'
 import { useMyContext } from 'context/MyContext'
-import Desk from 'models/Desk'
 import DeskGrid from 'components/DeskGrid'
 
-interface DesksFormInput {
-	x: number
-	y: number
-}
-
-const initialState = { x: 0, y: 0 }
-
 const DesksPage: React.FC = () => {
-	const [inputs, setInputs] = useState<DesksFormInput>(initialState)
 	const { desks, setDesks } = useMyContext()
-
-	const handleOnSubmit = ({ x, y }: DesksFormInput) => {
-		if (desks.find(desk => desk.x === x && desk.y === y)) {
-			return
-		}
-
-		const desk = new Desk(x, y)
-		setDesks([...desks, desk])
-	}
 
 	const handleOnClickItem = (id: string) => {
 		setDesks(desks.filter(desk => desk.id !== id))
