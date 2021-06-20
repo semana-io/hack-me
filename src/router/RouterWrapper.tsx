@@ -5,6 +5,8 @@ import DesksPage from 'pages/DesksPage'
 import EmployeesPage from 'pages/EmployeesPage'
 import HomePage from 'pages/HomePage'
 import Layout from 'components/Layout'
+import LoginPage from 'pages/LoginPage'
+import LoggedInRoute from './LoggedInRoute'
 
 interface RouterWrapperProps {}
 
@@ -15,14 +17,11 @@ const RouterWrapper: React.FC<RouterWrapperProps> = () => (
 				<Route exact path='/'>
 					<HomePage />
 				</Route>
-				<Route path='/desks'>
-					<DesksPage />
-				</Route>
-				<Route path='/employees'>
-					<EmployeesPage />
-				</Route>
-				<Route path='/calendar'>
-					<CalendarPage />
+				<LoggedInRoute path='/desks' component={<DesksPage />} />
+				<LoggedInRoute path='/employees' component={<EmployeesPage />} />
+				<LoggedInRoute path='/calendar' component={<CalendarPage />} />
+				<Route path='/login'>
+					<LoginPage />
 				</Route>
 			</Switch>
 		</Layout>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Grommet } from 'grommet'
 import RouterWrapper from 'router/RouterWrapper'
+import { MyContext } from 'context/MyContext'
+import useLocalStorage from 'utils/useLocalStorage'
 
 const theme = {
 	global: {
@@ -12,10 +14,16 @@ const theme = {
 	},
 }
 
-const App = () => (
-	<Grommet theme={theme}>
-		<RouterWrapper />
-	</Grommet>
-)
+const App = () => {
+	const [username, setUsername] = useLocalStorage('username', '')
+
+	return (
+		<Grommet theme={theme}>
+			<MyContext.Provider value={{ username, setUsername }}>
+				<RouterWrapper />
+			</MyContext.Provider>
+		</Grommet>
+	)
+}
 
 export default App
