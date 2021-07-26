@@ -2,7 +2,7 @@
 
 ## Delivery
 
-Let's create your branch on top of the main one.
+Let's fork the project on your Github.
 
 At the end, push all changes and create a pull request.
 
@@ -26,7 +26,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ## Exercise
 
-Let's develop an application (local only) that allow the user to manage desks, employees and assignation day by day.
+Let's develop an application (local only) that allows the user to manage desks, employees and assignation day by day.
 
 The app will contain a main menu with 3 items:
 
@@ -36,7 +36,7 @@ The app will contain a main menu with 3 items:
 
 The app will be developed in TypeScript and will contain relevant unit test. Other libs may be added.
 
-The delivery is not supposed to be all functional, let's focus on architecture, wording, ...
+The delivery **is not supposed to be all functional**, let's focus on architecture, wording, ...
 
 You'll have to present and justify your decisions during the debrief.
 
