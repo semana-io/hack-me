@@ -26,41 +26,42 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ## Exercise
 
-Let's develop an application (local only) that allows the user to manage desks, employees and assignation day by day.
+Let's develop an application (local only) that allows the user to manage desks, employees and assignation.
 
 The app will contain a main menu with 3 items:
 
 - Desks
 - Employees
-- Calendar
 
-The app will be developed in TypeScript and will contain relevant unit test. Other libs may be added.
 
-The delivery **is not supposed to be all functional**, let's focus on architecture, wording, ...
+The app will be developed in **TypeScript** and will contain relevant **unit test**. Other libs may be added.
+
+The delivery **is not supposed to be all functional**, let's focus on architecture, wording, or anything that matter for you ...
 
 You'll have to present and justify your decisions during the debrief.
 
 ### Desks
 
-The desk page will allow the user to create, view and modify the desk (unique number) list.
+The desk page will allow the user to create, view and modify the desk (unique number and a name) list.
 
 
 ### Employees
 
-The employee page will allow the user to create, view and modify the employee (name, etc...) list.
+The employee page will allow the user to create, view and modify the employee (name, email, preferred desk list) list.
 
-An employee may have a preferred ordered desk list.
+An employee has a preferred **ordered** desk list, that:
+- can have variable length
+- can be empty
 
 
-### Calendar
-
-The calendar page will display employee desk assignation for the next following days.
-
-An action will allow the user to assign a specific free desk to an employee for a specific day.
-
-An action will allow the user to remove an assignation.
+### Desk assignation (Algorithm)
 
 An action will allow the user to trigger an algorithm that assign automatically desk to employee according to the preferred desk list.
+
+The algorithm should, as possible:
+- give one of his first preferred desk to an employee
+- minimize complexity
+- return employee that doesn't get desk
 
 
 ### Extension : Zoning
@@ -70,6 +71,8 @@ Add zone concept. A zone is a group of desk. Desk could be part of 0 or 1 zone.
 The app will allow the user to set zone to desk.
 
 The app will allow the user to set a list of zone and/or desk to his preferred list.
+
+The algorithm shoudl be adapted to deal with zone.
 
 
 
