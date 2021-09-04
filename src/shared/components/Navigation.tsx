@@ -1,18 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 const Navigation: React.FC = () => (
-    <div className="Navigation">
-      <p>Hack Me</p>
-      <ul>
-        <li>
-          <NavLink to="/desks">Desks | </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employees">Employees</NavLink>
-        </li>
-      </ul>
-    </div>
+  <Navbar bg="light" expand="lg" className="navigation">
+    <Container>
+      <Navbar.Brand href="#desks">Hack me</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="/desks">Desks</Nav.Link>
+          <Nav.Link href="/employees">Employees</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
 );
 
 export default Navigation;

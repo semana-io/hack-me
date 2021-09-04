@@ -1,11 +1,15 @@
 import React, { useState, useContext } from 'react'
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 import { AppContext } from '../../context/Context';
 import { Desk } from '../../desks/models/Desk';
 import { Employee } from '../models/Employee';
 
 import EmployeesList from './EmployeesList';
+
+const animatedComponents = makeAnimated();
 
 const AddEmployeeForm: React.FC = () => {
   // Put prop here if in edition mode
@@ -30,9 +34,9 @@ const AddEmployeeForm: React.FC = () => {
   }
 
   const handleUserDesksChange = (e) => {
-    const deskToAdd = desks.find( d => d.id === parseInt(e.target.value, 10));
+    const deskToAdd = desks.find( d => d.id === parseInt(e.value, 10));
     const tmpFavoriteDesks = values.favoriteDesks;
-    if (deskToAdd && !tmpFavoriteDesks.find( d => d.id === parseInt(e.target.value, 10))) {
+    if (deskToAdd && !tmpFavoriteDesks.find( d => d.id === parseInt(e.value, 10))) {
       tmpFavoriteDesks.push(deskToAdd)
       setValues({...values, favoriteDesks: tmpFavoriteDesks});
     }
@@ -48,19 +52,29 @@ const AddEmployeeForm: React.FC = () => {
 	return ( 
     <div>
       <h2>Employee Creation</h2>
-      <form className="form-container" onSubmit={handleSubmission}>
-        <input className="form-field" placeholder="Albert" value={values.name} onChange={handleUserNameChange}/>
+      <Form id="employees-form" className="form-container" onSubmit={handleSubmission}>
+
+        <Form.Group controlId="name">
+          <Form.Label>Employee name</Form.Label>
+          <Form.Control type="text" placeholder="Montmartre" value={values.name} onChange={handleUserNameChange}/>
+        </Form.Group>
+
+        <Form.Group controlId="name">
+          <Form.Label>Employee name</Form.Label>
+          <Form.Control type="text" placeholder="albert@gmail.com" value={values.email} onChange={handleUserEmailChange}/>
+        </Form.Group>
         <br />
-        <input className="form-field" placeholder="Dupontel" value={values.email} onChange={handleUserEmailChange}/>
-        <br />
-        <select onChange={handleUserDesksChange} placeholder="Montmartre" multiple>
-          {
-            desks.map( d => <option key={ d.id } value={d.id}>{ d.name }</option>)
-          }
-        </select>
-        <br />
-        <Button type="submit">Save User</Button>
-      </form>
+        <Select
+          closeMenuOnSelect={false}
+          components={animatedComponents}
+          isMulti
+          options={desks.map( d => ({ value: d.id, label: d.name }))}
+          onChange={handleUserDesksChange}
+        />
+
+        <Button className="form-button" type="submit">Save User</Button>
+
+      </Form>
       {/* This would have been put in Employees Page if I could find a way to pass data between siblings with Context */}
       <EmployeesList />
     </div>

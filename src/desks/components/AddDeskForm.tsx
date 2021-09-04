@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { AppContext } from '../../context/Context';
 import { Desk } from '../models/Desk';
 import DesksList from './DesksList';
@@ -29,11 +29,13 @@ const AddDeskForm: React.FC = () => {
 	return ( 
     <div>
       <h2>Desk Creation</h2>
-      <form id="deskForm" className="form-container" onSubmit={handleSubmission}>
-        <input className="form-field" placeholder="Montmartre" value={values.name} onChange={handleDeskNameChange}/>
-        <br />
-        <Button type="submit">Save Desk</Button>
-      </form>
+      <Form id="desk-form" className="form-container" onSubmit={handleSubmission}>
+        <Form.Group controlId="name">
+          <Form.Label>Desk name</Form.Label>
+          <Form.Control type="text" placeholder="Montmartre" value={values.name} onChange={handleDeskNameChange}/>
+        </Form.Group>
+        <Button className="form-button" type="submit">Save Desk</Button>
+      </Form>
       {/* This would have been put in Desks Page if I could find a way to pass data between siblings with Context */}
       <DesksList />
     </div>

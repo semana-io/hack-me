@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 
 import { AppContext } from '../../context/Context';
 import { Desk } from '../../desks/models/Desk';
@@ -33,25 +34,42 @@ export const assignDesksToEmployees: any = (desks: Desk[], employees: Employee[]
     resultTmp.push(new EmployeeDesk(employeeTmp, tmpDesk));
     assignDesksToEmployees(desks, employees, resultTmp);
   }
-
   return resultTmp;
 }
 
 const EmployeesDeskAssignation: React.FC = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+
 	return ( 
-  <div>
+  <div className="desk-assignation">
     <h2>Desks Assignation</h2>
     <AppContext.Consumer>{ 
       ({desks, employees}) => {
-        return <button
+        return <Button
+            className="assignation-button"
             type="button"
-            onClick={() => assignDesksToEmployees(desks, employees)}
+            onClick={() => {
+              assignDesksToEmployees(desks, employees);
+              setShow(true);
+            }}
           >
             Assign desks to employees
-          </button>
+          </Button>
         }
       }
     </AppContext.Consumer>
+    <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal.Header closeButton>
+        <Modal.Title>Desk Assignation</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Ok
+        </Button>
+      </Modal.Footer>
+    </Modal>
   </div>)
 }
 export default EmployeesDeskAssignation;

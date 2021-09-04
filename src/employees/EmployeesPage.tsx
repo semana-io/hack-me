@@ -5,7 +5,7 @@ import EmployeesDeskAssignation from './components/EmployeesDesksAssignation';
 
 const EmployeesPage: React.FC = () => {
 	return ( 
-    <div>
+    <div className="employees-page">
       <h1>Employees page</h1>
       <AddEmployeeForm />
       {/* Employee list would have been here if I knew how to pass data between siblings */}
