@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react'
+import React, { useState, useContext } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -34,13 +34,9 @@ const AddEmployeeForm: React.FC = () => {
   }
 
   const handleUserDesksChange = (e) => {
-    const deskToAdd = desks.find( d => d.id === e[0].value);
-    console.log(deskToAdd);
-    const tmpFavoriteDesks = values.favoriteDesks;
-    if (deskToAdd && !tmpFavoriteDesks.find( d => d.id === parseInt(e.value, 10))) {
-      tmpFavoriteDesks.push(deskToAdd)
-      setValues({...values, favoriteDesks: tmpFavoriteDesks});
-    }
+    let tmpFavoriteDesks = values.favoriteDesks;
+    tmpFavoriteDesks = desks.filter(d => !!e.find( desk => desk.value === d.id));
+    setValues({...values, favoriteDesks: tmpFavoriteDesks});
   }
 
   const handleSubmission = (e) => {
@@ -59,7 +55,7 @@ const AddEmployeeForm: React.FC = () => {
 
         <Form.Group controlId="name">
           <Form.Label>Employee name</Form.Label>
-          <Form.Control type="text" placeholder="Montmartre" value={values.name} onChange={handleUserNameChange}/>
+          <Form.Control type="text" placeholder="Albert" value={values.name} onChange={handleUserNameChange}/>
         </Form.Group>
 
         <Form.Group controlId="email">

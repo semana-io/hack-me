@@ -9,11 +9,12 @@ import { useState } from 'react';
 function App() {
   const [desks, setDesks] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const [employeesDesks, setEmployeesDesks] = useState([]);
   return (
     <div>
       <BrowserRouter>
       <Navigation />
-      <AppContext.Provider value={{ desks, setDesks, employees, setEmployees }}>
+      <AppContext.Provider value={{ desks, setDesks, employees, setEmployees, employeesDesks, setEmployeesDesks }}>
         <Switch>
             <Route path="/" exact render={() => (<Redirect to={`/desks`} />)}/>
             <Route path='/desks' component={ DesksPage } />

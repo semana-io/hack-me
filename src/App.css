@@ -35,8 +35,17 @@ h1 {
   padding-right: 2%;
 }
 
+.data-list {
+  display: flex;
+  justify-content: space-between;
+}
+
 .form-button {
   align-self: flex-end;
   margin-top: 5%;
   width: 20%;
+}
+
+.font-bold {
+  font-weight: bold;
 }

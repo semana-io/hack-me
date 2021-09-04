@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 import { AppContext } from '../../context/Context';
@@ -38,9 +38,9 @@ export const assignDesksToEmployees: any = (desks: Desk[], employees: Employee[]
 }
 
 const EmployeesDeskAssignation: React.FC = () => {
+  const { employeesDesks, setEmployeesDesks } = useContext(AppContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  let assignationData: EmployeeDesk[] = [];
 
 	return ( 
   <div className="desk-assignation">
@@ -48,10 +48,10 @@ const EmployeesDeskAssignation: React.FC = () => {
     <AppContext.Consumer>{ 
       ({desks, employees}) => {
         return <Button
-            className="assignation-button"
             type="button"
+            disabled={employeesDesks.length <= 0}
             onClick={() => {
-              assignationData = assignDesksToEmployees(desks, employees);
+              setEmployeesDesks(assignDesksToEmployees(desks, employees));
               setShow(true);
             }}
           >
@@ -60,16 +60,25 @@ const EmployeesDeskAssignation: React.FC = () => {
         }
       }
     </AppContext.Consumer>
-    <Modal show={show &&Array.isArray(assignationData) && assignationData.length > 0 } onHide={handleClose} animation={false}>
+    <Modal show={show &&Array.isArray(employeesDesks) && employeesDesks.length > 0 } onHide={handleClose} animation={false}>
       <Modal.Header closeButton>
         <Modal.Title>Desk Assignation</Modal.Title>
       </Modal.Header>
       <Modal.Body>{
-        assignationData.map( (a: EmployeeDesk) => {
-            if (Array.isArray(a.desk) && a.desk.length > 0) {
-              return(<p>{ a.employee.name } get the { a.desk.name } desk</p>)
+        employeesDesks.map( (e: EmployeeDesk) => {
+            if (e.desk) {
+              return(
+              <p key={e.employee.email}>
+                <span className="font-bold">{ e.employee.name } </span> 
+                gets the 
+                <span className="font-bold"> { e.desk.name } </span> 
+              desk</p>)
             } else {
-              return(<p>{ a.employee.name } does not get a desk</p>)
+              return(
+              <p key={e.employee.email}>
+                <span className="font-bold">{ e.employee.name } </span> 
+                does not get a desk
+              </p>)
             }
         })
       }</Modal.Body>

@@ -14,17 +14,20 @@ const UsersList: React.FC = () => {
         return (
           <div>
           <h2>{ title }</h2>
+          <hr />
           {employees.map( e => <div key={e.email}> 
-              <p>Name: {e.name}</p>
-              <p>Email: {e.email}</p>
-              <div>Favorite desks : {e.favoriteDesks.map( d => d.name + ' ')}</div>
-              <br />
+            <div className="data-list">
+              <span><b>Name:</b> {e.name} </span>
+              <span><b>Email:</b> {e.email} </span>
+              <span><b>Favorite desks:</b> {e.favoriteDesks.map( d => d.name + ' ')}</span>
               <Button
                 type="button"
                 onClick={() => editEmployee(e)}
               >
-                Edit {e.name} (open modal TODO)
+                Edit (open modal TODO)
               </Button>
+              </div>
+              <hr />
             </div>)}
           </div>
           )

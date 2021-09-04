@@ -16,15 +16,17 @@ const DesksList: React.FC = () => {
         return (
           <div>
           <h2>{ title }</h2>
-          {desks.map( d => <div key={d.id}> 
-              {d.name}
-              <br />
-              <Button
-                type="button"
-                onClick={() => editDeskList(d)}
-              >
-                Edit {d.name} (open modal TODO)
-              </Button>
+          {desks.map( d => <div key={d.id}>
+              <div className="data-list">
+                {d.name}
+                <Button
+                  type="button"
+                  onClick={() => editDeskList(d)}
+                >
+                  Edit (open modal TODO)
+                </Button>
+              </div>
+              <hr />
             </div>)}
           </div>
           )
