@@ -74,7 +74,6 @@ const AddEmployeeForm: React.FC = () => {
           isMulti
           options={desksToSelect}
           onChange={handleUserDesksChange}
-          nodeRef={useRef(null)}
         />
 
         <Button className="form-button" type="submit">Save User</Button>

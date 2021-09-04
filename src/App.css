@@ -21,8 +21,18 @@ h1 {
 }
 
 .employees-page {
-  justify-content: center;
-  margin: 5% 20%;
+  margin: 5% 10%;
+}
+
+.employees-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.employee-main {
+  width: 70%;
+  padding-right: 2%;
 }
 
 .form-button {

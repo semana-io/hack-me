@@ -40,6 +40,7 @@ export const assignDesksToEmployees: any = (desks: Desk[], employees: Employee[]
 const EmployeesDeskAssignation: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+  let assignationData: EmployeeDesk[] = [];
 
 	return ( 
   <div className="desk-assignation">
@@ -50,7 +51,7 @@ const EmployeesDeskAssignation: React.FC = () => {
             className="assignation-button"
             type="button"
             onClick={() => {
-              assignDesksToEmployees(desks, employees);
+              assignationData = assignDesksToEmployees(desks, employees);
               setShow(true);
             }}
           >
@@ -59,11 +60,19 @@ const EmployeesDeskAssignation: React.FC = () => {
         }
       }
     </AppContext.Consumer>
-    <Modal show={show} onHide={handleClose} animation={false}>
+    <Modal show={show &&Array.isArray(assignationData) && assignationData.length > 0 } onHide={handleClose} animation={false}>
       <Modal.Header closeButton>
         <Modal.Title>Desk Assignation</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+      <Modal.Body>{
+        assignationData.map( (a: EmployeeDesk) => {
+            if (Array.isArray(a.desk) && a.desk.length > 0) {
+              return(<p>{ a.employee.name } get the { a.desk.name } desk</p>)
+            } else {
+              return(<p>{ a.employee.name } does not get a desk</p>)
+            }
+        })
+      }</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Ok
