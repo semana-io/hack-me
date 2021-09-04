@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AppContext } from '../../context/Context';
 import { Desk } from '../models/Desk';
-import AddDeskForm from './AddDeskForm';
-
-let editDesk: boolean = false;
 
 const editDeskList = (desk: Desk) => {
   console.log('desk', desk);
-  editDesk = !editDesk;
+  alert('Method not yet implemented');
 }
 
 
@@ -17,14 +14,14 @@ const DesksList: React.FC = () => {
     <h2>Desks list</h2>
     <AppContext.Consumer>{ 
       ({desks}) => {
-        console.log('desks', desks);
         return desks.map( d => <div key={d.id}> 
           {d.name}
+          <br />
           <button
             type="button"
             onClick={() => editDeskList(d)}
           >
-            Edit (open modal TODO)
+            Edit {d.name} (open modal TODO)
           </button>
         </div>
         )}

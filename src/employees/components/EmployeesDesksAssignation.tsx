@@ -1,20 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AppContext } from '../../context/Context';
+import { Desk } from '../../desks/models/Desk';
 import { Employee } from '../models/Employee';
 
+const assignDesksToEmployees = (desks: Desk[], employees: Employee[]) => {
+
+}
 
 const EmployeesDeskAssignation: React.FC = () => {
-  const { desks, employees } = useContext(AppContext);
 	return ( 
   <div>
     <h2>Desks Assignation</h2>
-    <div>{ 
-      employees.map( e => <div key={e.email}> 
-          {e.name}
-        </div>
-        )
+    <AppContext.Consumer>{ 
+      ({desks, employees}) => {
+        return <button
+            type="button"
+            onClick={() => assignDesksToEmployees(desks, employees)}
+          >
+            Assign desks to employees
+          </button>
+        }
       }
-    </div>
+    </AppContext.Consumer>
   </div>)
 }
 export default EmployeesDeskAssignation;

@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Button } from 'react-bootstrap';
+
 import { AppContext } from '../../context/Context';
 import { Desk } from '../../desks/models/Desk';
 import { Employee } from '../models/Employee';
+
 import EmployeesList from './EmployeesList';
 
 const AddEmployeeForm: React.FC = () => {
@@ -45,6 +47,7 @@ const AddEmployeeForm: React.FC = () => {
 
 	return ( 
     <div>
+      <h2>Employee Creation</h2>
       <form className="form-container" onSubmit={handleSubmission}>
         <input className="form-field" placeholder="Albert" value={values.name} onChange={handleUserNameChange}/>
         <br />
@@ -58,6 +61,7 @@ const AddEmployeeForm: React.FC = () => {
         <br />
         <Button type="submit">Save User</Button>
       </form>
+      {/* This would have been put in Employees Page if I could find a way to pass data between siblings with Context */}
       <EmployeesList />
     </div>
   )
