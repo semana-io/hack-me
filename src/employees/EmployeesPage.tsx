@@ -1,19 +1,24 @@
 import React from 'react';
 
-import AddEmployeeForm from './components/AddEmployeeForm';
+import AddEmployeeForm from './components/EmployeeForm';
 import EmployeesDeskAssignation from './components/EmployeesDesksAssignation';
 
 const EmployeesPage: React.FC = () => {
 	return ( 
     <div className="employees-page">
-        <h1>Employees page</h1>
+
+      <h1>Employees page</h1>
+
       <div className="employees-container">
         <div className="employee-main">
           <AddEmployeeForm />
         </div>
-      {/* Employee list would have been here if I knew how to pass data between siblings */}
-      <EmployeesDeskAssignation />
+
+        {/* Employee list would have been here if I knew how to pass data between siblings */}
+        <EmployeesDeskAssignation />
+        
       </div>
+
     </div>
   )
 }

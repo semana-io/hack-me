@@ -12,7 +12,7 @@ import EmployeesList from './EmployeesList';
 const animatedComponents = makeAnimated();
 
 const AddEmployeeForm: React.FC = () => {
-  // Put prop here if in edition mode
+  
   const [values, setValues] = useState<{
     name: string;
     email: string;
@@ -50,7 +50,9 @@ const AddEmployeeForm: React.FC = () => {
 
 	return ( 
     <div>
+
       <h2>Employee Creation</h2>
+
       <Form id="employees-form" className="form-container" onSubmit={handleSubmission}>
 
         <Form.Group controlId="name">
@@ -75,11 +77,14 @@ const AddEmployeeForm: React.FC = () => {
         <Button className="form-button" type="submit" disabled={!values.email || !values.name}>Save User</Button>
 
       </Form>
+      
       {/* This would have been put in Employees Page if I could find a way to pass data between siblings with Context */}
       <EmployeesList />
+
     </div>
   )
 }
+
 export default AddEmployeeForm;
 
 

@@ -39,6 +39,7 @@ export const assignDesksToEmployees: any = (desks: Desk[], employees: Employee[]
 
 const EmployeesDeskAssignation: React.FC = () => {
   const { employeesDesks, setEmployeesDesks } = useContext(AppContext);
+  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
@@ -51,7 +52,7 @@ const EmployeesDeskAssignation: React.FC = () => {
       ({desks, employees}) => {
         return <Button
             type="button"
-            disabled={employeesDesks.length <= 0}
+            disabled={employees.length <= 0}
             onClick={() => {
               setEmployeesDesks(assignDesksToEmployees(desks, employees));
               setShow(true);

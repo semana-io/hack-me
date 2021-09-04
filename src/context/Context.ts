@@ -23,8 +23,8 @@ const AppContext = createContext<ContextType>({
   setEmployeesDesks: value => {},
   deskToEdit: { id: -1, name: '' },
   setDeskToEdit: value => {}
-})
+});
 
-const useAppContext = () => useContext(AppContext)
+const useAppContext = () => useContext(AppContext);
 
 export { AppContext, useAppContext }

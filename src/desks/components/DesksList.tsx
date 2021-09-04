@@ -4,11 +4,13 @@ import { Button, Modal } from 'react-bootstrap';
 import { AppContext } from '../../context/Context';
 import { Desk } from '../models/Desk';
 
-import AddDeskForm from './AddDeskForm';
+import DeskForm from './DeskForm';
 
 
 const DesksList: React.FC = () => {
+
   const { desks, setDesks ,setDeskToEdit } = useContext(AppContext);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
@@ -59,7 +61,7 @@ const DesksList: React.FC = () => {
           <Modal.Title>Desk Assignation</Modal.Title>
         </Modal.Header>
         <Modal.Body>{
-          <AddDeskForm inModal={true}/>
+          <DeskForm inModal={true}/>
         }</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -70,4 +72,5 @@ const DesksList: React.FC = () => {
     </div>
   )
 }
+
 export default DesksList;
