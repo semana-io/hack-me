@@ -55,12 +55,12 @@ const AddEmployeeForm: React.FC = () => {
 
         <Form.Group controlId="name">
           <Form.Label>Employee name</Form.Label>
-          <Form.Control type="text" placeholder="Albert" value={values.name} onChange={handleUserNameChange}/>
+          <Form.Control type="text" placeholder="Albert" required value={values.name} onChange={handleUserNameChange}/>
         </Form.Group>
 
         <Form.Group controlId="email">
           <Form.Label>Employee name</Form.Label>
-          <Form.Control type="text" placeholder="albert@gmail.com" value={values.email} onChange={handleUserEmailChange}/>
+          <Form.Control type="text" placeholder="albert@gmail.com" required value={values.email} onChange={handleUserEmailChange}/>
         </Form.Group>
         <br />
         <Select
@@ -72,7 +72,7 @@ const AddEmployeeForm: React.FC = () => {
           onChange={handleUserDesksChange}
         />
 
-        <Button className="form-button" type="submit">Save User</Button>
+        <Button className="form-button" type="submit" disabled={!values.email || !values.name}>Save User</Button>
 
       </Form>
       {/* This would have been put in Employees Page if I could find a way to pass data between siblings with Context */}

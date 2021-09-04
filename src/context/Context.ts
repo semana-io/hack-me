@@ -9,7 +9,9 @@ interface ContextType {
   employees: Employee[],
   setEmployees: Function,
   employeesDesks: EmployeeDesk[],
-  setEmployeesDesks: Function
+  setEmployeesDesks: Function,
+  deskToEdit: Desk,
+  setDeskToEdit: Function
 }
 
 const AppContext = createContext<ContextType>({
@@ -18,7 +20,9 @@ const AppContext = createContext<ContextType>({
   employees: [],
   setEmployees: value => {},
   employeesDesks: [],
-  setEmployeesDesks: value => {}
+  setEmployeesDesks: value => {},
+  deskToEdit: { id: -1, name: '' },
+  setDeskToEdit: value => {}
 })
 
 const useAppContext = () => useContext(AppContext)

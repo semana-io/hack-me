@@ -44,7 +44,9 @@ const EmployeesDeskAssignation: React.FC = () => {
 
 	return ( 
   <div className="desk-assignation">
+
     <h2>Desks Assignation</h2>
+
     <AppContext.Consumer>{ 
       ({desks, employees}) => {
         return <Button
@@ -60,6 +62,7 @@ const EmployeesDeskAssignation: React.FC = () => {
         }
       }
     </AppContext.Consumer>
+
     <Modal show={show &&Array.isArray(employeesDesks) && employeesDesks.length > 0 } onHide={handleClose} animation={false}>
       <Modal.Header closeButton>
         <Modal.Title>Desk Assignation</Modal.Title>
@@ -88,6 +91,7 @@ const EmployeesDeskAssignation: React.FC = () => {
         </Button>
       </Modal.Footer>
     </Modal>
+    
   </div>)
 }
 export default EmployeesDeskAssignation;

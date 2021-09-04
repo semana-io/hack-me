@@ -10,11 +10,12 @@ function App() {
   const [desks, setDesks] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [employeesDesks, setEmployeesDesks] = useState([]);
+  const [deskToEdit, setDeskToEdit] = useState({ id: -1, name: ''});
   return (
     <div>
       <BrowserRouter>
       <Navigation />
-      <AppContext.Provider value={{ desks, setDesks, employees, setEmployees, employeesDesks, setEmployeesDesks }}>
+      <AppContext.Provider value={{ desks, setDesks, employees, setEmployees, employeesDesks, setEmployeesDesks, deskToEdit, setDeskToEdit }}>
         <Switch>
             <Route path="/" exact render={() => (<Redirect to={`/desks`} />)}/>
             <Route path='/desks' component={ DesksPage } />
