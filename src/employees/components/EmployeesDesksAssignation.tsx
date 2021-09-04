@@ -6,8 +6,7 @@ import { Desk } from '../../desks/models/Desk';
 import { Employee } from '../models/Employee';
 import { EmployeeDesk } from '../models/EmployeeDesk';
 
-// TODO add tests on the function
-const compareEmployeesDesksList = ( a: Employee, b: Employee) => {
+export const compareEmployeesDesksList = ( a: Employee, b: Employee) => {
     if ( (!Array.isArray(a.favoriteDesks) || a.favoriteDesks.length === 0) && (Array.isArray(b.favoriteDesks) && b.favoriteDesks.length > 0)){
       return 1;
     }

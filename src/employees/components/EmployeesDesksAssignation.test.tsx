@@ -2,7 +2,7 @@ import { Desk } from '../../desks/models/Desk';
 import { Employee } from '../models/Employee';
 import { EmployeeDesk } from '../models/EmployeeDesk';
 
-import { assignDesksToEmployees } from './EmployeesDesksAssignation';
+import { assignDesksToEmployees, compareEmployeesDesksList } from './EmployeesDesksAssignation';
 
 describe('EmployeesDesksAssignation', () => {
 
@@ -21,10 +21,10 @@ describe('EmployeesDesksAssignation', () => {
   const employee5 = new Employee('employee5', 'employee5@mail', [desk1, desk5]);
   const employee6 = new Employee('employee6', 'employee6@mail', [desk2]);
   const employee7 = new Employee('employee7', 'employee7@mail', [desk1, desk3, desk4]);
-  mockEmployees.push(employee1, employee2, employee3, employee4, employee5, employee6, employee7);
-
+  
   describe('assignDesksToEmployees', () => {
-
+    
+    mockEmployees.push(employee1, employee2, employee3, employee4, employee5, employee6, employee7);
     const expectedResult: EmployeeDesk[] = [];
     expectedResult.push(
       new EmployeeDesk(employee1, desk1),
@@ -56,6 +56,30 @@ describe('EmployeesDesksAssignation', () => {
     it('should return an empty list if desks and employees are empty', () => {
       const assignationResult = assignDesksToEmployees([], []);
       expect(assignationResult).toStrictEqual([]);
+    });
+  });
+
+  describe('compareEmployeesDesksList', () => {
+    const employee8 = new Employee('employee8', 'employee8@mail', []);
+
+    it('should return 0 none of the employees has favorite desks', () => {
+      const result = compareEmployeesDesksList(employee2, employee8);
+      expect(result).toStrictEqual(0);
+    });
+
+    it('should return -1 when first employee has favorite desks', () => {
+      const result = compareEmployeesDesksList(employee1, employee2);
+      expect(result).toStrictEqual(-1);
+    });
+
+    it('should return 1 when second employee has favorite desks', () => {
+      const result = compareEmployeesDesksList(employee2, employee1);
+      expect(result).toStrictEqual(1);
+    });
+
+    it('should return 0 when both employees have favorite desks set', () => {
+      const result = compareEmployeesDesksList(employee3, employee1);
+      expect(result).toStrictEqual(0);
     });
   });
 });
