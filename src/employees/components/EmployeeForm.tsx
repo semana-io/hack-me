@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-import { AppContext } from '../../context/Context';
+import { AppContext } from '../../core/context/Context';
 import { Desk } from '../../desks/models/Desk';
 import { Employee } from '../models/Employee';
 

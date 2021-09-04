@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { AppContext } from './context/Context';
+
+import { AppContext } from './core/context/Context';
 import './App.css';
 import DesksPage from './desks/DesksPage';
 import EmployeesPage from './employees/EmployeesPage';
 import Navigation from './shared/components/Navigation';
-import { useState } from 'react';
 
 function App() {
   const [desks, setDesks] = useState([]);

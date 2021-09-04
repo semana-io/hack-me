@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Button, Form } from 'react-bootstrap';
-import { AppContext } from '../../context/Context';
+
+import { AppContext } from '../../core/context/Context';
 import { Desk } from '../models/Desk';
+
 import DesksList from './DesksList';
 
 const DeskForm: React.FC<{ inModal: boolean }> = ({ inModal }) => {

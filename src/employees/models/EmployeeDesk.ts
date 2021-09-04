@@ -1,4 +1,5 @@
 import { Desk } from "../../desks/models/Desk";
+
 import { Employee } from "./Employee";
 
 export class EmployeeDesk {

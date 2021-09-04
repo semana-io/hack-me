@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-import { AppContext } from '../../context/Context';
+import { AppContext } from '../../core/context/Context';
 import { Desk } from '../models/Desk';
 
 import DeskForm from './DeskForm';

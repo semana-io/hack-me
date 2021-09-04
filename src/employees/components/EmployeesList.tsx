@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { AppContext } from '../../context/Context';
+
+import { AppContext } from '../../core/context/Context';
 
 const editEmployee = (employee) => {
   alert('Method not yet implemented');

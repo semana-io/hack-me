@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
-import { Desk } from '../desks/models/Desk';
-import { Employee } from '../employees/models/Employee';
-import { EmployeeDesk } from '../employees/models/EmployeeDesk';
+import { Desk } from '../../desks/models/Desk';
+import { Employee } from '../../employees/models/Employee';
+import { EmployeeDesk } from '../../employees/models/EmployeeDesk';
 
 interface ContextType {
   desks: Desk[],
