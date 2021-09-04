@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -34,7 +34,8 @@ const AddEmployeeForm: React.FC = () => {
   }
 
   const handleUserDesksChange = (e) => {
-    const deskToAdd = desks.find( d => d.id === parseInt(e.value, 10));
+    const deskToAdd = desks.find( d => d.id === e[0].value);
+    console.log(deskToAdd);
     const tmpFavoriteDesks = values.favoriteDesks;
     if (deskToAdd && !tmpFavoriteDesks.find( d => d.id === parseInt(e.value, 10))) {
       tmpFavoriteDesks.push(deskToAdd)
@@ -49,6 +50,8 @@ const AddEmployeeForm: React.FC = () => {
     setValues({ name: '', email: '', favoriteDesks: []});
   }
 
+  const desksToSelect = desks.map( d => ({ value: d.id, label: d.name }));
+
 	return ( 
     <div>
       <h2>Employee Creation</h2>
@@ -59,17 +62,19 @@ const AddEmployeeForm: React.FC = () => {
           <Form.Control type="text" placeholder="Montmartre" value={values.name} onChange={handleUserNameChange}/>
         </Form.Group>
 
-        <Form.Group controlId="name">
+        <Form.Group controlId="email">
           <Form.Label>Employee name</Form.Label>
           <Form.Control type="text" placeholder="albert@gmail.com" value={values.email} onChange={handleUserEmailChange}/>
         </Form.Group>
         <br />
         <Select
+          controlId="desk"
           closeMenuOnSelect={false}
           components={animatedComponents}
           isMulti
-          options={desks.map( d => ({ value: d.id, label: d.name }))}
+          options={desksToSelect}
           onChange={handleUserDesksChange}
+          nodeRef={useRef(null)}
         />
 
         <Button className="form-button" type="submit">Save User</Button>
