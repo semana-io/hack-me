@@ -11,7 +11,7 @@ import EmployeesList from './EmployeesList';
 
 const animatedComponents = makeAnimated();
 
-const AddEmployeeForm: React.FC = () => {
+const EmployeeForm: React.FC = () => {
   
   const [values, setValues] = useState<{
     name: string;
@@ -85,6 +85,6 @@ const AddEmployeeForm: React.FC = () => {
   )
 }
 
-export default AddEmployeeForm;
+export default EmployeeForm;
 
 

@@ -8,7 +8,7 @@ const DesksPage: React.FC = () => {
 
 	return ( 
     <AppContext.Consumer>{
-      ({desks}) => {
+      () => {
         return (<div className="desks-page">
             <h1>Desks page</h1>
             <DeskForm inModal={false} />

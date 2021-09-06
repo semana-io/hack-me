@@ -1,25 +1,33 @@
 import React from 'react';
+import { AppContext } from '../core/context/Context';
 
-import AddEmployeeForm from './components/EmployeeForm';
+import EmployeeForm from './components/EmployeeForm';
 import EmployeesDeskAssignation from './components/EmployeesDesksAssignation';
 
 const EmployeesPage: React.FC = () => {
 	return ( 
-    <div className="employees-page">
 
-      <h1>Employees page</h1>
+    <AppContext.Consumer>{
+        () => {
+          return(
+          <div className="employees-page">
 
-      <div className="employees-container">
-        <div className="employee-main">
-          <AddEmployeeForm />
-        </div>
+            <h1>Employees page</h1>
 
-        {/* Employee list would have been here if I knew how to pass data between siblings */}
-        <EmployeesDeskAssignation />
-        
-      </div>
+            <div className="employees-container">
+              <div className="employee-main">
+                <EmployeeForm />
+              </div>
 
-    </div>
+              <EmployeesDeskAssignation />
+  
+            </div>
+
+          </div>
+          )
+        }
+      }
+    </AppContext.Consumer>
   )
 }
 export default EmployeesPage;
