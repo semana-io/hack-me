@@ -51,7 +51,7 @@ const EmployeesDeskAssignation: React.FC = () => {
       ({desks, employees}) => {
         return <Button
             type="button"
-            disabled={employees.length <= 0}
+            disabled={desks.length <= 0}
             onClick={() => {
               setEmployeesDesks(assignDesksToEmployees(desks, employees));
               setShow(true);

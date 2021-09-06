@@ -4,8 +4,6 @@ import { Button, Form } from 'react-bootstrap';
 import { AppContext } from '../../core/context/Context';
 import { Desk } from '../models/Desk';
 
-import DesksList from './DesksList';
-
 const DeskForm: React.FC<{ inModal: boolean }> = ({ inModal }) => {
   const { desks, setDesks, deskToEdit, setDeskToEdit } = useContext(AppContext);
   
@@ -45,12 +43,6 @@ const DeskForm: React.FC<{ inModal: boolean }> = ({ inModal }) => {
         </Form.Group>
         <Button className="form-button" type="submit" disabled={!values.name}>Save Desk</Button>
       </Form>
-
-      {/* This would have been put in Desks Page if I could find a way to pass data between siblings with Context */}
-      {
-        inModal ?  null : <DesksList />
-      }
-
     </div>
   )
 }
