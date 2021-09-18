@@ -1,14 +1,15 @@
-import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQuery } from 'react-query';
+import { Desk } from '../models/desk';
 import { Employee } from '../models/employee';
-import { FieldsWithLabels, FieldsWithLabelsAndTypes, Item } from '../models/types';
+import { FieldsWithLabels, FieldsWithLabelsAndTypes, Item } from '../types';
 import Button from './generic/button';
 import FormModal from './generic/form-modal';
 import Table from './generic/table';
 
 const Employees = () : JSX.Element => {
-  type AddEmployee = Omit<Employee, 'id'>;
+  type AddEmployee = Omit<Employee, 'id' | 'desks'>;
 
   const {
     isLoading, isError, data, refetch,
@@ -18,16 +19,20 @@ const Employees = () : JSX.Element => {
   const { mutateAsync: updateAsync } = useMutation(({ id, employee }: {id: number, employee: Item}) => axios.put<void>(`http://localhost:3002/employees/${id}`, employee));
   const { mutateAsync: deleteAsync } = useMutation((id: number) => axios.delete<void>(`http://localhost:3002/employees/${id}`));
 
+  const {
+    isLoading: isDesksLoading, isError: isDesksError, data: desksData,
+  } = useQuery('fetchDesks', () => axios.get<Desk[]>('http://localhost:3002/desks'));
+
   const emptyEmployee: AddEmployee = { firstName: '', lastName: '', email: '' };
 
   const [employee, setEmployee] = useState<Item>(emptyEmployee);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (isLoading) {
+  if (isLoading || isDesksLoading) {
     return <div className="spinner-border" />;
   }
 
-  if (isError) {
+  if (isError || isDesksError) {
     return (
       <div className="alert alert-danger" role="alert">
         Error loading the employees data
@@ -36,6 +41,7 @@ const Employees = () : JSX.Element => {
   }
 
   const employees = (data as AxiosResponse<Employee[]>).data;
+  const desks = (desksData as AxiosResponse<Desk[]>).data.map((desk) => ({ label: `${desk.name} - ${desk.number}`, value: desk.id }));
 
   const submitModal = async (newEmployee: Item) => {
     if (newEmployee.id === undefined) {
@@ -86,6 +92,12 @@ const Employees = () : JSX.Element => {
       field: 'email',
       label: 'Email',
       type: 'email',
+    },
+    {
+      field: 'desks',
+      label: 'Preferred Desks',
+      type: 'select',
+      options: desks,
     },
   ];
 

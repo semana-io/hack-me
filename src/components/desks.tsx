@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { Desk } from '../models/desk';
-import { FieldsWithLabels, FieldsWithLabelsAndTypes, Item } from '../models/types';
+import { FieldsWithLabels, FieldsWithLabelsAndTypes, Item } from '../types';
 import Button from './generic/button';
 import FormModal from './generic/form-modal';
 import Table from './generic/table';

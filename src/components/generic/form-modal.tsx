@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
-import { FieldsWithLabelsAndTypes, Item } from '../../models/types';
+import { FieldsWithLabelsAndTypes, Item } from '../../types';
+import FormSelect from './form-select';
 
 const FormModal = <T extends Item> (
   {
@@ -10,12 +11,12 @@ const FormModal = <T extends Item> (
     label: string,
     isModalOpen: boolean,
     setIsModalOpen: (bool: boolean) => void,
-     formFields: FieldsWithLabelsAndTypes<Item>,
-     initialItem: T | null,
-     submit: (item: T) => Promise<void>
+    formFields: FieldsWithLabelsAndTypes<T>,
+    initialItem: Item | null,
+    submit: (item: T) => Promise<void>
   },
 ) : JSX.Element => {
-  const [item, setItem] = React.useState<T | null>(initialItem);
+  const [item, setItem] = React.useState<Item | null>(initialItem);
 
   const addItemAndClose = async (newItem: T) => {
     await submit(newItem);
@@ -44,9 +45,11 @@ const FormModal = <T extends Item> (
           <div className="modal-body">
             <form>
               {formFields.map((formField) => (
-                <div className="mb-3" key={formField.field}>
+                <div className="mb-3" key={formField.field as string}>
                   {`${formField.label}:`}
-                  <input type={formField.type} value={(item as T)[formField.field] as string | number} onChange={(e) => setItem({ ...(item as T), [formField.field]: e.target.value })} className="form-control" />
+                  {formField.type === 'select'
+                    ? <FormSelect formField={formField} item={item} setItem={setItem} />
+                    : <input type={formField.type} value={(item as T)[formField.field] as string | number} onChange={(e) => setItem({ ...(item as T), [formField.field]: e.target.value })} className="form-control" />}
                 </div>
               ))}
             </form>

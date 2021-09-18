@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './button';
-import { Item } from '../../models/types';
+import { Item } from '../../types';
 
 type TableProps<T extends {id: number}, K extends keyof T> = {
   items: Array<T>;

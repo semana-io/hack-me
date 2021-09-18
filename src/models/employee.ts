@@ -1,6 +1,9 @@
-export interface Employee {
+import { Item } from '../types';
+
+export interface Employee extends Item {
   id: number;
   firstName: string,
   lastName: string,
-  email: string
+  email: string,
+  desks: number[]
 }
