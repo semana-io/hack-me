@@ -5,10 +5,10 @@ import FormSelect from './form-select';
 
 const FormModal = <T extends Item> (
   {
-    label, isModalOpen, setIsModalOpen, formFields, initialItem, submit,
+    title, isModalOpen, setIsModalOpen, formFields, initialItem, submit,
   } :
   {
-    label: string,
+    title: string,
     isModalOpen: boolean,
     setIsModalOpen: (bool: boolean) => void,
     formFields: FieldsWithLabelsAndTypes<T>,
@@ -33,13 +33,13 @@ const FormModal = <T extends Item> (
     <Modal
       isOpen={!!item && isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
-      contentLabel={label}
+      contentLabel={title}
       className="modal d-block"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{label}</h5>
+            <h5 className="modal-title">{title}</h5>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setIsModalOpen(false)} />
           </div>
           <div className="modal-body">
@@ -56,7 +56,7 @@ const FormModal = <T extends Item> (
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setIsModalOpen(false)}>Close</button>
-            <button type="button" className="btn btn-dark" onClick={() => addItemAndClose((item as T))}>{label}</button>
+            <button type="button" className="btn btn-dark" onClick={() => addItemAndClose((item as T))}>Submit</button>
           </div>
         </div>
       </div>

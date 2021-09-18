@@ -96,7 +96,7 @@ const Desks = () : JSX.Element => {
         label="Add desk"
       />
       <FormModal
-        label="Add desk"
+        title="Desk"
         submit={submitModal}
         formFields={formFields}
         isModalOpen={isModalOpen}

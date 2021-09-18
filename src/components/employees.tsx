@@ -114,7 +114,7 @@ const Employees = () : JSX.Element => {
         label="Add user"
       />
       <FormModal
-        label="Add user"
+        title="Employee"
         submit={submitModal}
         formFields={formFields}
         isModalOpen={isModalOpen}
