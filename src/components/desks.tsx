@@ -15,6 +15,8 @@ const Desks = () : JSX.Element => {
   } = useQuery('fetchEmployees', () => axios.get<Desk[]>('http://localhost:3002/desks'));
 
   const { mutateAsync: addAsync } = useMutation((desk: Item) => axios.post<void>('http://localhost:3002/desks', desk));
+  const { mutateAsync: updateAsync } = useMutation(({ id, desk }: {id: number, desk: Item}) => axios.put<void>(`http://localhost:3002/desks/${id}`, desk));
+  const { mutateAsync: deleteAsync } = useMutation((id: number) => axios.delete<void>(`http://localhost:3002/desks/${id}`));
 
   const emptyDesk: AddDesk = { number: 0, name: '' };
 
@@ -36,11 +38,25 @@ const Desks = () : JSX.Element => {
   const desks = (data as AxiosResponse<Desk[]>).data;
 
   const submitModal = async (newDesk: Item) => {
-    if (desks.find((existingDesk) => existingDesk.number === newDesk.number)) {
-      return;
+    if (newDesk.id === undefined) {
+      if (desks.find((existingDesk) => existingDesk.number === newDesk.number)) {
+        return;
+      }
+      await addAsync(newDesk);
+    } else {
+      await updateAsync({ id: newDesk.id as number, desk: newDesk });
     }
-    await addAsync(newDesk);
     await refetch();
+  };
+
+  const deleteDesk = async (id: number) => {
+    await deleteAsync(id);
+    await refetch();
+  };
+
+  const openModifyModal = (item: Item) => {
+    setDesk(item);
+    setIsModalOpen(true);
   };
 
   const columns : FieldsWithLabels<Desk> = [
@@ -72,6 +88,8 @@ const Desks = () : JSX.Element => {
       <Table
         items={desks}
         columns={columns}
+        openModifyModal={openModifyModal}
+        deleteItem={deleteDesk}
       />
       <Button
         onClick={() => setIsModalOpen(true)}
