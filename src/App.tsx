@@ -26,6 +26,9 @@ const App = () : JSX.Element => {
           <Route exact path="/assignment">
             <Assignment />
           </Route>
+          <Route exact path="/">
+            <h3 className="text-center mt-5">Welcome!</h3>
+          </Route>
         </Router>
       </div>
     </QueryClientProvider>
