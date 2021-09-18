@@ -1,0 +1,106 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "Arabella",
+      "lastName": "Romanski",
+      "email": "aromanski0@wp.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Bartholemy",
+      "lastName": "Dunbavin",
+      "email": "bdunbavin1@ucsd.edu"
+    },
+    {
+      "id": 3,
+      "firstName": "Ellie",
+      "lastName": "Driver",
+      "email": "edriver2@cam.ac.uk"
+    },
+    {
+      "id": 4,
+      "firstName": "Ebonee",
+      "lastName": "Cello",
+      "email": "ecello3@linkedin.com"
+    },
+    {
+      "id": 5,
+      "firstName": "Mylo",
+      "lastName": "Eltringham",
+      "email": "meltringham4@netvibes.com"
+    },
+    {
+      "id": 6,
+      "firstName": "Gunther",
+      "lastName": "Gold",
+      "email": "ggold5@hugedomains.com"
+    },
+    {
+      "id": 7,
+      "firstName": "Bill",
+      "lastName": "Catmull",
+      "email": "bcatmull6@1688.com"
+    },
+    {
+      "id": 8,
+      "firstName": "Melba",
+      "lastName": "Vanns",
+      "email": "mvanns7@cbslocal.com"
+    },
+    {
+      "id": 9,
+      "firstName": "Jennilee",
+      "lastName": "Chaplyn",
+      "email": "jchaplyn8@hc360.com"
+    },
+    {
+      "id": 10,
+      "firstName": "Alanna",
+      "lastName": "Signe",
+      "email": "asigne9@ucla.edu"
+    }
+  ],
+  "desks": [
+    {
+      "id": 1,
+      "name": "Toughjoyfax"
+    },
+    {
+      "id": 2,
+      "name": "Trippledex"
+    },
+    {
+      "id": 3,
+      "name": "Konklux"
+    },
+    {
+      "id": 4,
+      "name": "Bytecard"
+    },
+    {
+      "id": 5,
+      "name": "Konklab"
+    },
+    {
+      "id": 6,
+      "name": "Biodex"
+    },
+    {
+      "id": 7,
+      "name": "Aerified"
+    },
+    {
+      "id": 8,
+      "name": "Rank"
+    },
+    {
+      "id": 9,
+      "name": "Span"
+    },
+    {
+      "id": 10,
+      "name": "Tres-Zap"
+    }
+  ]
+}
