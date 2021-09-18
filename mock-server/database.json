@@ -64,43 +64,53 @@
   "desks": [
     {
       "id": 1,
-      "name": "Toughjoyfax"
+      "number": "81",
+      "name": "Stim"
     },
     {
       "id": 2,
-      "name": "Trippledex"
+      "number": "3151",
+      "name": "Stringtough"
     },
     {
       "id": 3,
-      "name": "Konklux"
+      "number": "659",
+      "name": "Vagram"
     },
     {
       "id": 4,
-      "name": "Bytecard"
+      "number": "50239",
+      "name": "Stim"
     },
     {
       "id": 5,
-      "name": "Konklab"
+      "number": "545",
+      "name": "Tampflex"
     },
     {
       "id": 6,
-      "name": "Biodex"
+      "number": "344",
+      "name": "Overhold"
     },
     {
       "id": 7,
-      "name": "Aerified"
+      "number": "7394",
+      "name": "Fixflex"
     },
     {
       "id": 8,
-      "name": "Rank"
+      "number": "80",
+      "name": "Tampflex"
     },
     {
       "id": 9,
-      "name": "Span"
+      "number": "98",
+      "name": "Zoolab"
     },
     {
       "id": 10,
-      "name": "Tres-Zap"
+      "number": "481",
+      "name": "Y-find"
     }
   ]
 }
