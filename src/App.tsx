@@ -8,7 +8,7 @@ import Employees from './components/employees';
 import Navbar from './components/navbar';
 
 const App = () : JSX.Element => (
-  <div>
+  <div className="container">
     <Router>
       <Navbar />
       <Route exact path="/employees">
