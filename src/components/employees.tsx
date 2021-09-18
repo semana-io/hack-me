@@ -1,13 +1,25 @@
 import axios, { AxiosResponse } from 'axios';
-import React from 'react';
-import { useQuery } from 'react-query';
+import React, { useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { Employee } from '../models/employee';
+import { FieldsWithLabels, FieldsWithLabelsAndTypes, Item } from '../models/types';
+import Button from './generic/button';
+import FormModal from './generic/form-modal';
 import Table from './generic/table';
 
 const Employees = () : JSX.Element => {
+  type AddEmployee = Omit<Employee, 'id'>;
+
   const {
-    isLoading, isError, data,
+    isLoading, isError, data, refetch,
   } = useQuery('fetchEmployees', () => axios.get<Employee[]>('http://localhost:3002/employees'));
+
+  const { mutateAsync: addAsync } = useMutation((employee: Item) => axios.post<void>('http://localhost:3002/employees', employee));
+
+  const emptyEmployee: AddEmployee = { firstName: '', lastName: '', email: '' };
+
+  const [employee, setEmployee] = useState<Item>(emptyEmployee);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return <div className="spinner-border" />;
@@ -23,7 +35,12 @@ const Employees = () : JSX.Element => {
 
   const employees = (data as AxiosResponse<Employee[]>).data;
 
-  const columns : ({ field: keyof Employee, label: string })[] = [
+  const submitModal = async (newEmployee: Item) => {
+    await addAsync(newEmployee);
+    await refetch();
+  };
+
+  const columns : FieldsWithLabels<Employee> = [
     {
       field: 'firstName',
       label: 'First Name',
@@ -38,11 +55,43 @@ const Employees = () : JSX.Element => {
     },
   ];
 
+  const formFields : FieldsWithLabelsAndTypes<Employee> = [
+    {
+      field: 'firstName',
+      label: 'First Name',
+      type: 'text',
+    },
+    {
+      field: 'lastName',
+      label: 'Last Name',
+      type: 'text',
+    },
+    {
+      field: 'email',
+      label: 'Email',
+      type: 'email',
+    },
+  ];
+
   return (
-    <Table
-      items={employees}
-      columns={columns}
-    />
+    <>
+      <Table
+        items={employees}
+        columns={columns}
+      />
+      <Button
+        onClick={() => setIsModalOpen(true)}
+        label="Add user"
+      />
+      <FormModal
+        label="Add user"
+        submit={submitModal}
+        formFields={formFields}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        initialItem={employee}
+      />
+    </>
   );
 };
 
