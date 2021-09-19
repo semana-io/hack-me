@@ -16,7 +16,7 @@ const Table = <T extends {id: number}, K extends keyof T>
   } : TableProps<T, K>) : JSX.Element => (
     <table className="table">
       <thead>
-        <tr>
+        <tr data-testid="headers">
           {columns.map((column) => <th scope="col" key={`${column.field}`}>{column.label}</th>)}
           {openModifyModal && <th scope="col">Modify</th>}
           {deleteItem && <th scope="col">Delete</th>}
@@ -24,10 +24,10 @@ const Table = <T extends {id: number}, K extends keyof T>
       </thead>
       <tbody>
         {items.map((item) => (
-          <tr key={`${item.id}`}>
+          <tr key={`${item.id}`} data-testid={`row-${item.id}`}>
             {columns.map((column) => (<td key={`${item.id}-${column.field}`}>{item[column.field]}</td>))}
-            {openModifyModal && <td><Button label="Modify" onClick={() => openModifyModal(item)} /></td>}
-            {deleteItem && <td><Button label="Delete" onClick={() => deleteItem(item.id)} /></td>}
+            {openModifyModal && <td data-testid={`modify-${item.id}`}><Button label="Modify" onClick={() => openModifyModal(item)} /></td>}
+            {deleteItem && <td data-testid={`delete-${item.id}`}><Button label="Delete" onClick={() => deleteItem(item.id)} /></td>}
           </tr>
         ))}
       </tbody>

@@ -9,7 +9,7 @@ const Button = (
      label: string
     },
 ) : JSX.Element => (
-  <button onClick={onClick} type="button" className="btn btn-dark">{label}</button>
+  <button onClick={onClick} type="button" className="btn btn-dark" data-testid="button">{label}</button>
 );
 
 Button.propTypes = {
