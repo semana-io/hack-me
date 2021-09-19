@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import { FieldWithLabelAndType, Item } from '../../types';
+import { FieldWithLabelAndType, Item, SelectOption } from '../../types';
 
 const FormSelect = <T extends Item> (
   {
@@ -10,7 +10,12 @@ const FormSelect = <T extends Item> (
   },
 ) : JSX.Element => {
   const selectedValues = (item as T)[formField.field] as number[];
-  const selectedOptions = formField.options
+  const optionsDictionary : {[x: number]: SelectOption} = formField.options
+    ?.reduce((prev, curr) => ({ ...prev, [curr.value]: curr }), {}) ?? {};
+  const selectedOptions = selectedValues
+    ?.map((selectedValue) => optionsDictionary[selectedValue]) ?? [];
+
+  formField.options
     ?.filter((option) => selectedValues?.includes(option.value as number));
   return (
     <Select

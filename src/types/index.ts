@@ -1,5 +1,6 @@
-type SelectOption = { label: string, value: number };
 type FieldType = 'text' | 'email' | 'number' | 'select';
+
+export type SelectOption = { label: string, value: number };
 
 export type Item = {[x: string]: string | number | number[]};
 export type FieldsWithLabels<T> = ({ field: keyof T, label: string })[];
