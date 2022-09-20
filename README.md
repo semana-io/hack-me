@@ -26,17 +26,17 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ## Exercise
 
-Let's develop an application (local only) that allows the user to manage desks, employees and assignation.
+Let's develop an application that allows the user to manage desks, employees and assignation.
 
-The app will contain a main menu with 3 items:
+The app will contain a main menu with 2 items:
 
 - Desks
 - Employees
 
 
-The app will be developed in **TypeScript** and will contain relevant **unit test**. Other libs may be added.
+The app will be developed in **TypeScript**. Other libs may be added.
 
-The delivery **is not supposed to be all functional**, let's focus on architecture, wording, or anything that matter for you ...
+The delivery **is not supposed to be all functional**, let's focus on architecture, wording, or anything that matter to you ...
 
 You'll have to present and justify your decisions during the debrief.
 
@@ -62,18 +62,4 @@ The algorithm should, as possible:
 - give one of his first preferred desk to an employee
 - minimize complexity
 - return employee that doesn't get desk
-
-
-### Extension : Zoning
-
-Add zone concept. A zone is a group of desk. Desk could be part of 0 or 1 zone.
-
-The app will allow the user to set zone to desk.
-
-The app will allow the user to set a list of zone and/or desk to his preferred list.
-
-The algorithm shoudl be adapted to deal with zone.
-
-
-
 
