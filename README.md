@@ -4,7 +4,7 @@
 
 Let's fork the project on your Github.
 
-At the end, push all changes and create a pull request.
+At the end, push all changes on your repository and send the link.
 
 ## How to run and test
 
@@ -42,7 +42,7 @@ You'll have to present and justify your decisions during the debrief.
 
 ### Desks
 
-The desk page will allow the user to create, view and modify the desk (unique number and a name) list.
+The desk page will allow the user to create, view and modify the desk (unique id and a name) list.
 
 
 ### Employees
