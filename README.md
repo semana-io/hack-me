@@ -42,12 +42,12 @@ You'll have to present and justify your decisions during the debrief.
 
 ### Desks
 
-The desk page will allow the user to create, view and modify the desk (unique id and a name) list.
+The desk page will allow the user to create, view, modify and delete desks (unique id and a name) list.
 
 
 ### Employees
 
-The employee page will allow the user to create, view and modify the employee (name, email, preferred desk list) list.
+The employee page will allow the user to create, view, modify and delete the employee (name, email, preferred desk list) list.
 
 An employee has a preferred **ordered** desk list, that:
 - can have variable length
