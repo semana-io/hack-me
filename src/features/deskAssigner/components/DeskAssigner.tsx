@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppSelector } from "../../../app/hooks";
 import { selectDesks } from "../../desks/state/desksSlice";
 import { Employee } from "../../employees/components/EmployeesList";
-import { selectEmployees } from "../../employees/state/employeesSlice";
+import { selectEmployees } from "../../employees/state/selectors";
 
 export const DeskAssigner = () => {
   const employees = useAppSelector(selectEmployees);

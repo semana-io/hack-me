@@ -1,8 +1,4 @@
-// todo: move it to redux store
-export interface Desk {
-  id: string;
-  name: string;
-}
+import { Desk } from "../state/desksSlice";
 
 export interface DeskListItemProps extends Desk {
   actionButtons?: ActionButton[];

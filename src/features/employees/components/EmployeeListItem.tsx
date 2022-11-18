@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 import { ActionButton } from "../../desks/components/DeskListItem";
-import { editEmployee } from "../state/employeesSlice";
+import { editEmployee, Employee } from "../state/employeesSlice";
 import { EmployeeDeskList } from "./EmployeeDeskList";
-import { Employee } from "./EmployeesList";
 
 export interface EmployeeListItemProps {
   employee: Employee;

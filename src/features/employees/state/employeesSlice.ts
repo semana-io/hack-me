@@ -1,59 +1,116 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../app/store";
 import { initialDesksState } from "../../desks/state/desksSlice";
-import { Employee } from "../components/EmployeesList";
 
-export interface DesksState {
-  employees: Employee[];
+export interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  deskPreferenceList: EmployeeDeskPreference[];
 }
 
-const initialState: DesksState = {
-  employees: [
-    {
+export interface EmployeeDeskPreference {
+  id: string;
+  index: number;
+}
+
+export interface EmployeesState {
+  employees: Record<string, Employee>;
+}
+
+const initialState: EmployeesState = {
+  employees: {
+    "3297e9d2-6683-11ed-8a73-cf4939c13467": {
+      id: "3297e9d2-6683-11ed-8a73-cf4939c13467",
       name: "john",
       email: "john@gmail.com",
-      // todo: use references here instead of having duplicate state and sync modifications
-      //       to desks in desksSlice here in users lists
       deskPreferenceList: [
-        { ...initialDesksState.desks[0], index: 0 },
-        { ...initialDesksState.desks[1], index: 1 },
-        { ...initialDesksState.desks[2], index: 2 },
+        { id: initialDesksState.desks[0].id, index: 0 },
+        { id: initialDesksState.desks[1].id, index: 1 },
+        { id: initialDesksState.desks[2].id, index: 2 },
       ],
     },
-  ],
+  },
 };
 
 export const employeesSlice = createSlice({
   name: "employees",
   initialState,
   reducers: {
-    addEmployee: (state, action: PayloadAction<Employee>) => {
-      state.employees.push(action.payload);
+    addOrEditEmployee: (state, action: PayloadAction<Employee>) => {
+      state.employees[action.payload.id] = action.payload;
+      // todo: figure out method (like saga) to return error if user already exists for the sake of refreshment
     },
 
     removeEmployee: (state, action: PayloadAction<Employee>) => {
-      state.employees = state.employees.filter(
-        (employee) => employee.email !== action.payload.email
-      );
+      delete state.employees[action.payload.id];
     },
 
-    editEmployee: (state, action: PayloadAction<Employee>) => {
-      state.employees = state.employees.map((employee) =>
-        employee.email === action.payload.email ? action.payload : employee
-      );
-    },
+    // increaseEmployeeDeskPreference: (
+    //   state,
+    //   action: PayloadAction<{
+    //     employeeId: string;
+    //     desk: EmployeeDeskPreference;
+    //   }>
+    // ) => {
+    //   const { desk, employeeId } = action.payload;
 
-    updateDeskPreferences: (state, action: PayloadAction<Employee>) => {
-      state.employees = state.employees.map((employee) =>
-        employee.email === action.payload.email ? action.payload : employee
-      );
+    //   const newPreferences = movePreferenceIndex(
+    //     state.employees[employeeId].deskPreferenceList,
+    //     desk.id
+    //   );
+    //   // const newPreferences = state.employees[employeeId].deskPreferenceList.map(
+    //   //   (listedDesk) => {
+    //   //     const isAscendingDesk = listedDesk.id === desk.id;
+    //   //     const isDetronedDesk = listedDesk.index === desk.index - 1;
+
+    //   //     if (isAscendingDesk) {
+    //   //       return {
+    //   //         ...desk,
+    //   //         index: desk.index > 0 ? desk.index - 1 : 0,
+    //   //       };
+    //   //     } else if (isDetronedDesk) {
+    //   //       return { ...listedDesk, index: listedDesk.index + 1 };
+    //   //     }
+    //   //     return listedDesk;
+    //   //   }
+    //   // );
+    //   state.employees[employeeId].deskPreferenceList = newPreferences || [];
+    // },
+
+    // removeDeskFromEmployeesPreferences: (
+    //   state,
+    //   action: PayloadAction<{
+    //     employeeId: string;
+    //     desk: EmployeeDeskPreference;
+    //   }>
+    // ) => {
+    //   const { desk, employeeId } = action.payload;
+
+    //   state.employees[employeeId].deskPreferenceList = state.employees[
+    //     employeeId
+    //   ].deskPreferenceList.filter((preference) => preference.id !== desk.id);
+    // },
+
+    saveEmployeePreferencesDraft: (
+      state,
+      action: PayloadAction<{
+        employeeId: string;
+        preferences: EmployeeDeskPreference[];
+      }>
+    ) => {
+      const { employeeId, preferences } = action.payload;
+      state.employees[employeeId].deskPreferenceList = preferences;
     },
   },
 });
 
-export const { addEmployee, removeEmployee, editEmployee } =
-  employeesSlice.actions;
-
-export const selectEmployees = (state: RootState) => state.employees.employees;
+export const {
+  addOrEditEmployee,
+  removeEmployee,
+  // increaseEmployeeDeskPreference,
+  // removeDeskFromEmployeesPreferences,
+  saveEmployeePreferencesDraft,
+} = employeesSlice.actions;
 
 export default employeesSlice.reducer;

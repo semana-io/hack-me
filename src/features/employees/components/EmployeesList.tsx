@@ -1,25 +1,13 @@
 import { useState } from "react";
-import { Desk } from "../../desks/components/DeskListItem";
 import { EmployeeListItem } from "./EmployeeListItem";
 import { EmployeeForm } from "./EmployeeForm";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
-  addEmployee,
-  editEmployee,
+  addOrEditEmployee,
+  Employee,
   removeEmployee,
-  selectEmployees,
 } from "../state/employeesSlice";
-
-export interface EmployeeDesk extends Desk {
-  index: number;
-}
-
-// todo: add id field
-export interface Employee {
-  name: string;
-  email: string;
-  deskPreferenceList: EmployeeDesk[];
-}
+import { selectEmployees } from "../state/selectors";
 
 export interface EmployeesListProps {}
 
@@ -51,9 +39,9 @@ export const EmployeesList = () => {
       <EmployeeForm
         formCallback={(employee) => {
           if (selectedEmployee) {
-            dispatch(editEmployee(employee));
+            dispatch(addOrEditEmployee(employee));
           } else {
-            dispatch(addEmployee(employee));
+            dispatch(addOrEditEmployee(employee));
           }
           // reset employee here after action to be able to create new one
           setSelectedEmployee(undefined);
