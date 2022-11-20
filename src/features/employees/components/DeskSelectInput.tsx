@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Desk } from "../../desks/components/DeskListItem";
+import { Desk } from "../../desks/state/desksSlice";
 
 export interface DeskSelectInputProps {
   desks: Desk[];
@@ -24,7 +24,9 @@ export const DeskSelectInput: FC<DeskSelectInputProps> = ({
       }
     >
       {desks.map(({ id, name }) => (
-        <option value={id}>{name}</option>
+        <option key={id} value={id}>
+          {name}
+        </option>
       ))}
     </select>
   );

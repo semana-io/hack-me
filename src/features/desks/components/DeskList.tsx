@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { Desk, DeskListItem } from "./DeskListItem";
+import { DeskListItem } from "./DeskListItem";
 import { DeskForm } from "./DeskForm";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import {
-  addDesk,
-  editDesk,
-  removeDesk,
-  selectDesks,
-} from "../state/desksSlice";
+import { addOrEditDesk, Desk, removeDesk } from "../state/desksSlice";
+import { selectDesksArray } from "../state/selectors";
 
 export const DeskList = () => {
-  const desks = useAppSelector(selectDesks);
+  const desks = useAppSelector(selectDesksArray);
   const dispatch = useAppDispatch();
 
   const [selectedDesk, setSelectedDesk] = useState<Desk>();
@@ -18,25 +14,24 @@ export const DeskList = () => {
   return (
     <div>
       {desks.map((desk) => (
-        <div>
-          <DeskListItem
-            {...desk}
-            actionButtons={[
-              { text: "edit", onClick: () => setSelectedDesk(desk) },
-              {
-                text: "remove",
-                onClick: () => dispatch(removeDesk(desk)),
-              },
-            ]}
-          />
-        </div>
+        <DeskListItem
+          key={desk.id}
+          {...desk}
+          actionButtons={[
+            { text: "edit", onClick: () => setSelectedDesk(desk) },
+            {
+              text: "remove",
+              onClick: () => dispatch(removeDesk(desk)),
+            },
+          ]}
+        />
       ))}
       <DeskForm
         formCallback={(desk) => {
           if (selectedDesk) {
-            dispatch(editDesk(desk));
+            dispatch(addOrEditDesk(desk));
           } else {
-            dispatch(addDesk(desk));
+            dispatch(addOrEditDesk(desk));
           }
           setSelectedDesk(undefined);
         }}

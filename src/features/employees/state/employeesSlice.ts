@@ -24,11 +24,9 @@ const initialState: EmployeesState = {
       id: "3297e9d2-6683-11ed-8a73-cf4939c13467",
       name: "john",
       email: "john@gmail.com",
-      deskPreferenceList: [
-        { id: initialDesksState.desks[0].id, index: 0 },
-        { id: initialDesksState.desks[1].id, index: 1 },
-        { id: initialDesksState.desks[2].id, index: 2 },
-      ],
+      deskPreferenceList: Object.values(initialDesksState.desks)
+        .slice(0, 2)
+        .map(({ id }, index) => ({ id, index })),
     },
   },
 };

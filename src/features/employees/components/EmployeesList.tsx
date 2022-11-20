@@ -7,12 +7,12 @@ import {
   Employee,
   removeEmployee,
 } from "../state/employeesSlice";
-import { selectEmployees } from "../state/selectors";
+import { selectEmployees, selectEmployeesArray } from "../state/selectors";
 
 export interface EmployeesListProps {}
 
 export const EmployeesList = () => {
-  const employees = useAppSelector(selectEmployees);
+  const employees = useAppSelector(selectEmployeesArray);
   const dispatch = useAppDispatch();
 
   const [selectedEmployee, setSelectedEmployee] = useState<
@@ -24,6 +24,7 @@ export const EmployeesList = () => {
       <div>
         {employees.map((employee) => (
           <EmployeeListItem
+            key={employee.id}
             employee={employee}
             actionButtons={[
               { text: "edit", onClick: () => setSelectedEmployee(employee) },

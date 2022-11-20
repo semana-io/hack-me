@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useAppSelector } from "../../../app/hooks";
-import { selectDesks } from "../../desks/state/desksSlice";
-import { Employee } from "../../employees/components/EmployeesList";
-import { selectEmployees } from "../../employees/state/selectors";
+import { selectDesksArray } from "../../desks/state/selectors";
+import { Employee } from "../../employees/state/employeesSlice";
+import { selectEmployeesArray } from "../../employees/state/selectors";
 
 export const DeskAssigner = () => {
-  const employees = useAppSelector(selectEmployees);
-  const desks = useAppSelector(selectDesks);
+  const employees = useAppSelector(selectEmployeesArray);
+  const desks = useAppSelector(selectDesksArray);
 
   const [assigmentResults, setAssigmentResults] = useState<string[]>([]);
   const [unassignedEmployees, setUnassignedEmployees] = useState<Employee[]>(

@@ -1,13 +1,13 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { DeskListItem } from "../../desks/components/DeskListItem";
 import { selectDesksByIds } from "../../desks/state/selectors";
 import { EmployeeDeskPreference } from "../state/employeesSlice";
-import { selectEmployeeDeskPreferences } from "../state/selectors";
 
 export interface EmployeeDeskListProps {
   employeeId: string;
-  draftMode: boolean;
+  preferences: EmployeeDeskPreference[];
+  onChange?: (preferences: EmployeeDeskPreference[]) => any;
 }
 
 // NOTE: NEXT TIME BE AWARE OF HAVING FORMS THAT AUTO SAVES VS THAT REQUIRES SAVING OF THE DRAFT
@@ -21,24 +21,36 @@ export interface EmployeeDeskListProps {
 
 // another todo: implement formik or react final form on other forms on the page
 // and fix all the code issues resulted in changing state shape
-export const EmployeeDeskList: FC<EmployeeDeskListProps> = ({ employeeId }) => {
-  const dispatch = useAppDispatch();
+export const EmployeeDeskList: FC<EmployeeDeskListProps> = ({
+  employeeId,
+  preferences,
+  onChange,
+}) => {
+  // const dispatch = useAppDispatch();
 
-  const desksPreferences = useAppSelector((state) =>
-    selectEmployeeDeskPreferences(state, employeeId)
-  );
+  const [draftPreferences, setDraftPreferences] = useState<
+    EmployeeDeskPreference[]
+  >([]);
+
+  useEffect(() => {
+    setDraftPreferences(preferences);
+  }, [preferences]);
+
+  // const desksPreferences = useAppSelector((state) =>
+  //   selectEmployeeDeskPreferences(state, employeeId)
+  // );
   const desks = useAppSelector((state) =>
     selectDesksByIds(
       state,
-      desksPreferences.map(({ id }) => id)
+      draftPreferences.map(({ id }) => id)
     )
   );
 
-  if (!employeeId) {
-    return null;
-  }
+  // if (!employeeId) {
+  //   return null;
+  // }
 
-  const movePreferenceIndex = (
+  const movePreferenceIndexByOneUp = (
     preferences: EmployeeDeskPreference[],
     deskId: string
   ) => {
@@ -48,46 +60,79 @@ export const EmployeeDeskList: FC<EmployeeDeskListProps> = ({ employeeId }) => {
       console.error("cannot increase preference of the most loved desk");
       return;
     }
-    const newPreferences = preferences.splice(
+    const newPreferences = preferences.map((p) => p);
+    newPreferences.splice(
       currentIndex - 1,
       0,
-      preferences.splice(currentIndex, 1)[0]
+      newPreferences.splice(currentIndex, 1)[0]
     );
+
     return newPreferences.map((preference, i) => ({ ...preference, index: i }));
+  };
+
+  const removePreferenceFromArray = (
+    preferences: EmployeeDeskPreference[],
+    deskId: string
+  ) => {
+    const slimedPreferences = preferences.filter(
+      (preference) => preference.id !== deskId
+    );
+    return slimedPreferences;
   };
 
   return (
     <div>
-      {desksPreferences.map((deskPreference, i) => {
+      {draftPreferences.map((deskPreference, i) => {
         const desk = desks[deskPreference.id];
-        const actionButtons = [
-          {
-            text: "up",
-            onClick: () =>
-              dispatch(
-                increaseEmployeeDeskPreference({
-                  desk: deskPreference,
-                  employeeId,
-                })
-              ),
-          },
-          {
-            text: "remove",
-            onClick: () =>
-              dispatch(
-                removeDeskFromEmployeesPreferences({
-                  desk: deskPreference,
-                  employeeId,
-                })
-              ),
-          },
-        ];
+        const actionButtons = onChange
+          ? [
+              {
+                text: "up",
+                onClick: () => {
+                  const newPrefrences = movePreferenceIndexByOneUp(
+                    draftPreferences,
+                    deskPreference.id
+                  )!;
+                  setDraftPreferences(newPrefrences);
+                  onChange(newPrefrences);
+                  // have a state outside of the
 
-        if (i === 0) {
+                  // dispatch(
+                  //   increaseEmployeeDeskPreference({
+                  //     desk: deskPreference,
+                  //     employeeId,
+                  //   })
+                  // ),
+                },
+              },
+              {
+                text: "remove",
+                onClick: () => {
+                  setDraftPreferences(
+                    removePreferenceFromArray(
+                      draftPreferences,
+                      deskPreference.id
+                    )
+                  );
+                  onChange(draftPreferences);
+                  // dispatch(
+                  //   removeDeskFromEmployeesPreferences({
+                  //     desk: deskPreference,
+                  //     employeeId,
+                  //   })
+                  // ),
+                },
+              },
+            ]
+          : [];
+
+        if (i === 0 && actionButtons.length > 0) {
           actionButtons.shift();
         }
 
-        return <DeskListItem {...desk} actionButtons={actionButtons} />;
+        return (
+          <DeskListItem key={desk.id} {...desk} actionButtons={actionButtons} />
+        );
       })}
     </div>
   );

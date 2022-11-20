@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 import { ActionButton } from "../../desks/components/DeskListItem";
-import { editEmployee, Employee } from "../state/employeesSlice";
+import { addOrEditEmployee, Employee } from "../state/employeesSlice";
 import { EmployeeDeskList } from "./EmployeeDeskList";
 
 export interface EmployeeListItemProps {
@@ -14,8 +14,7 @@ export const EmployeeListItem: FC<EmployeeListItemProps> = ({
   actionButtons,
 }) => {
   const dispatch = useAppDispatch();
-
-  const { name, email } = employee;
+  const { name, email, id, deskPreferenceList } = employee;
 
   const showActionButtons = actionButtons && actionButtons.length > 0;
 
@@ -25,17 +24,26 @@ export const EmployeeListItem: FC<EmployeeListItemProps> = ({
       <div>email: {email}</div>
       <div>
         preffered desk:
-        <EmployeeDeskList
-          employee={employee}
-          onChange={(changedEmployee) =>
-            dispatch(editEmployee(changedEmployee))
-          }
-        />
+        {/* <EmployeeDeskList
+          employeeId={id}
+          preferences={deskPreferenceList}
+          // onChange={(changedPreferences) => {
+          //   console.log(changedPreferences);
+          //   dispatch(
+          //     addOrEditEmployee({
+          //       ...employee,
+          //       deskPreferenceList: changedPreferences,
+          //     })
+          //   );
+          // }}
+        /> */}
       </div>
       {showActionButtons && (
         <div>
           {actionButtons?.map(({ text, onClick }) => (
-            <button onClick={onClick}>{text}</button>
+            <button key={text} onClick={onClick}>
+              {text}
+            </button>
           ))}
         </div>
       )}

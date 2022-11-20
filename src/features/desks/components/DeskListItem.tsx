@@ -25,7 +25,9 @@ export const DeskListItem = ({
       {showActionButtons && (
         <div>
           {actionButtons?.map(({ text, onClick }) => (
-            <button onClick={onClick}>{text}</button>
+            <button key={text} onClick={onClick}>
+              {text}
+            </button>
           ))}
         </div>
       )}

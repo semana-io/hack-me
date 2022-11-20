@@ -13,13 +13,34 @@ export interface DesksState {
 
 export const initialDesksState: DesksState = {
   desks: {
-    [uuidV4()]: { id: uuidV4(), name: "cuteDesk" },
-    [uuidV4()]: { id: uuidV4(), name: "weirdDesk" },
-    [uuidV4()]: { id: uuidV4(), name: "niceDesk" },
-    [uuidV4()]: { id: uuidV4(), name: "galaxyDesk" },
-    [uuidV4()]: { id: uuidV4(), name: "funDesk" },
-    [uuidV4()]: { id: uuidV4(), name: "bigDesk" },
-    [uuidV4()]: { id: uuidV4(), name: "justDesk" },
+    "6924301c-68bf-11ed-989b-eba2f77bdfc0": {
+      id: "6924301c-68bf-11ed-989b-eba2f77bdfc0",
+      name: "cuteDesk",
+    },
+    "738e2e72-68bf-11ed-a723-7f3cc90a8082": {
+      id: "738e2e72-68bf-11ed-a723-7f3cc90a8082",
+      name: "weirdDesk",
+    },
+    "753b1dfc-68bf-11ed-b8bc-df44f1c0ad46": {
+      id: "753b1dfc-68bf-11ed-b8bc-df44f1c0ad46",
+      name: "niceDesk",
+    },
+    "769dcb18-68bf-11ed-9f72-670330a48984": {
+      id: "769dcb18-68bf-11ed-9f72-670330a48984",
+      name: "galaxyDesk",
+    },
+    "76f9bb58-68bf-11ed-b2f1-9baedd626b07": {
+      id: "76f9bb58-68bf-11ed-b2f1-9baedd626b07",
+      name: "funDesk",
+    },
+    "774d0006-68bf-11ed-8679-678af601fccd": {
+      id: "774d0006-68bf-11ed-8679-678af601fccd",
+      name: "bigDesk",
+    },
+    "779c0c0a-68bf-11ed-8782-8f83f45784da": {
+      id: "779c0c0a-68bf-11ed-8782-8f83f45784da",
+      name: "justDesk",
+    },
   },
 };
 
