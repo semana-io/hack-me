@@ -90,16 +90,16 @@ export const employeesSlice = createSlice({
     //   ].deskPreferenceList.filter((preference) => preference.id !== desk.id);
     // },
 
-    saveEmployeePreferencesDraft: (
-      state,
-      action: PayloadAction<{
-        employeeId: string;
-        preferences: EmployeeDeskPreference[];
-      }>
-    ) => {
-      const { employeeId, preferences } = action.payload;
-      state.employees[employeeId].deskPreferenceList = preferences;
-    },
+    // saveEmployeePreferencesDraft: (
+    //   state,
+    //   action: PayloadAction<{
+    //     employeeId: string;
+    //     preferences: EmployeeDeskPreference[];
+    //   }>
+    // ) => {
+    //   const { employeeId, preferences } = action.payload;
+    //   state.employees[employeeId].deskPreferenceList = preferences;
+    // },
   },
 });
 
@@ -108,7 +108,7 @@ export const {
   removeEmployee,
   // increaseEmployeeDeskPreference,
   // removeDeskFromEmployeesPreferences,
-  saveEmployeePreferencesDraft,
+  // saveEmployeePreferencesDraft,
 } = employeesSlice.actions;
 
 export default employeesSlice.reducer;

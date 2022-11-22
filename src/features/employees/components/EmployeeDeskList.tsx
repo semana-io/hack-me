@@ -45,10 +45,30 @@ export const EmployeeDeskList: FC<EmployeeDeskListProps> = ({
       draftPreferences.map(({ id }) => id)
     )
   );
-
   // if (!employeeId) {
   //   return null;
   // }
+
+  // remove desks that no longer exist (removed by external or internal force)
+  // const nonexistentDesks: string[] = [];
+  // Object.entries(desks).forEach(
+  //   ([key, value]) => !value && nonexistentDesks.push(key)
+  // );
+  // console.log(nonexistentDesks, draftPreferences, preferences);
+  // if (nonexistentDesks.length > 0) {
+  //   console.log(
+  //     "SUUUP",
+  //     draftPreferences.filter((pref) =>
+  //       nonexistentDesks.find((deskId) => deskId !== pref.id)
+  //     )
+  //   );
+  //   setDraftPreferences(
+  //     draftPreferences.filter((pref) =>
+  //       nonexistentDesks.find((deskId) => deskId !== pref.id)
+  //     )
+  //   );
+  // }
+  // console.log("FORWARD", nonexistentDesks, draftPreferences, preferences);
 
   const movePreferenceIndexByOneUp = (
     preferences: EmployeeDeskPreference[],

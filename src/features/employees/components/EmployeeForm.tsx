@@ -1,10 +1,9 @@
 import { Form, Formik } from "formik";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useAppSelector } from "../../../app/hooks";
 import { FormInput } from "../../common/components/FormInput";
 import { selectDesksArray } from "../../desks/state/selectors";
 import { Employee, EmployeeDeskPreference } from "../state/employeesSlice";
-import { DeskSelectInput } from "./DeskSelectInput";
 import { EmployeeDeskList } from "./EmployeeDeskList";
 import * as Yup from "yup";
 import { Desk } from "../../desks/state/desksSlice";
@@ -31,54 +30,30 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   employee,
 }) => {
   const desks = useAppSelector(selectDesksArray);
-  const [formState, setFormState] = useState<EmployeFormState>(
-    turnEmployeeObjectIntoFormState()
-  );
-
-  // update employee if new one is passed from props
-  useEffect(() => {
-    setFormState(turnEmployeeObjectIntoFormState(employee));
-  }, [employee]);
-
-  // const [name, setName] = useState<string>("");
-  // const [email, setEmail] = useState<string>("");
-  // const [deskList, setDeskList] = useState<EmployeeDeskPreference[]>([]);
-  // const [selectedDesk, setSelectedDesk] = useState<EmployeeDeskPreference>();
-
-  // useEffect(() => {
-  //   setName(employee?.name || "");
-  //   setEmail(employee?.email || "");
-  //   setDeskList(employee?.deskPreferenceList || []);
-  //   setSelectedDesk(employee?.deskPreferenceList[0]);
-  // }, [employee]);
-
-  // const resetForm = () => {
-  //   setName("");
-  //   setEmail("");
-  //   setDeskList([]);
-  // };
 
   return (
     <div>
       <Formik
         enableReinitialize
-        initialValues={formState}
+        initialValues={turnEmployeeObjectIntoFormState(employee)}
+        // this one is not typed, figure it out!
         validationSchema={Yup.object({
+          id: Yup.string(),
           name: Yup.string().required("Required"),
           email: Yup.string().required("Required"),
           selectedDesk: Yup.string(),
+          preferences: Yup.array(),
         })}
-        onSubmit={(values, { setFieldValue, setSubmitting }) => {
+        onSubmit={(values, { setFieldValue, setSubmitting, resetForm }) => {
           if (!values.id) {
             console.log("New Employee");
-            setFieldValue("id", uuid());
+            values.id = uuid();
           }
-          console.log("Values on submit", values);
-          setFormState(turnEmployeeObjectIntoFormState());
-          formCallback(turnFormStateIntoEmployee(formState));
+          formCallback(turnFormStateIntoEmployee(values));
+          resetForm();
         }}
       >
-        {({ values, setFieldError, setTouched }) => (
+        {({ values, setFieldError, setTouched, setFieldValue }) => (
           <Form>
             <FormInput
               label="name"
@@ -92,22 +67,19 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
               type="text"
               placeholder="email"
             />
-            {/* NOTE: there is a fieldArray component that can be used here but its simpler and cleaner to have preferences
-                  be handled outside of formik, TODO:!!! try to move it to use <FieldArray> */}
             <EmployeeDeskList
               employeeId={values.id}
               preferences={values.preferences}
-              // employee={{ name, email, deskPreferenceList: deskList }}
-              onChange={(preferences) =>
-                setFormState({ ...formState, preferences })
-              }
+              onChange={(preferences) => {
+                setFieldValue("preferences", preferences);
+              }}
             />
 
             <FormSelect label="selectedDesk" name="selectedDesk">
               <option key="" value="">
                 Select a desk
               </option>
-              {getNonListedDesks(desks, formState.preferences).map(
+              {getNonListedDesks(desks, values.preferences).map(
                 ({ id, name }) => (
                   <option key={id} value={id}>
                     {name}
@@ -115,17 +87,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
                 )
               )}
             </FormSelect>
-
-            {/* <DeskSelectInput
-          desks={getNonListedDesks()}
-          value={selectedDesk || getNonListedDesks()[0]}
-          onChange={(desk) => {
-            setSelectedDesk({
-              ...desk,
-              index: deskList.length,
-            });
-          }}
-        /> */}
 
             <button
               type="button"
@@ -136,31 +97,19 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
                   return;
                 }
 
-                const newState = {
-                  ...formState,
-                  preferences: [
-                    ...formState.preferences,
-                    {
-                      id: values.selectedDesk,
-                      index: formState.preferences.length,
-                    },
-                  ],
-                };
-                setFormState(newState);
-                // setDeskList([...deskList, selectedDesk!]);
+                setFieldValue("preferences", [
+                  ...values.preferences,
+                  {
+                    id: values.selectedDesk,
+                    index: values.preferences.length,
+                  },
+                ]);
               }}
             >
               add desk
             </button>
 
-            <button
-              // onClick={() => {
-
-              //   // formCallback({ name, email, deskPreferenceList: deskList });
-              //   // resetForm();
-              // }}
-              type="submit"
-            >
+            <button type="submit">
               {values.id ? "Edit Employee" : "Save Employee"}
             </button>
           </Form>

@@ -7,7 +7,7 @@ import {
   Employee,
   removeEmployee,
 } from "../state/employeesSlice";
-import { selectEmployees, selectEmployeesArray } from "../state/selectors";
+import { selectEmployeesArray } from "../state/selectors";
 
 export interface EmployeesListProps {}
 
@@ -40,8 +40,10 @@ export const EmployeesList = () => {
       <EmployeeForm
         formCallback={(employee) => {
           if (selectedEmployee) {
+            //edit
             dispatch(addOrEditEmployee(employee));
           } else {
+            //add
             dispatch(addOrEditEmployee(employee));
           }
           // reset employee here after action to be able to create new one
